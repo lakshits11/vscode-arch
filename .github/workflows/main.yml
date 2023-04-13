@@ -25,17 +25,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Download latest tar
-        run: |
-          curl -JLO "$(cat PKGBUILD | grep -Po "_src_x86_64=\"\K.+\"" | rev | cut -c2- | rev)"
-          echo "${ls}"
+        run: curl -JLO "$(cat PKGBUILD | grep -Po "_src_x86_64=\"\K.+\"" | rev | cut -c2- | rev)"
       - name: Get build number
         id: get-build-number
         run: |
-          build_number="$(echo ./code-stable*.tar.gz | grep -Po "\.\/code-stable-x64-\K.+" | rev | cut -c8- | rev)"
+          build_number="$(echo ./code-*.tar.gz | grep -Po "\.\/code-x64-\K.+" | rev | cut -c8- | rev)"
           echo "::set-output name=build_number::${build_number}"
           echo "Latest build number: ${build_number}"
       - name: Extract tar
-        run: tar -xvzf ./code-stable-*.tar.gz
+        run: tar -xvzf ./code-*.tar.gz
       - name: Get version
         id: get-version
         run: |
