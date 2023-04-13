@@ -4,9 +4,15 @@
 
 VSCode-*/
 code-insider-*.tar.gz
+code-stable-*.tar.gz
 code_*_*.tar.gz
 visual-studio-code-insiders-*.pkg.tar.*
 visual-studio-code-insiders.db
 visual-studio-code-insiders.db.tar.*
 visual-studio-code-insiders.files
 visual-studio-code-insiders.files.tar.*
+visual-studio-code-stable-*.pkg.tar.*
+visual-studio-code-stable.db
+visual-studio-code-stable.db.tar.*
+visual-studio-code-stable.files
+visual-studio-code-stable.files.tar.*

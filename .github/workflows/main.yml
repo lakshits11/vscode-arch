@@ -8,8 +8,8 @@ on:
       - .github/workflows/**
       - .github/actions/**
       - PKGBUILD
-      - visual-studio-code-insiders.desktop
-      - visual-studio-code-insiders-url-handler.desktop
+      - visual-studio-code.desktop
+      - visual-studio-code-url-handler.desktop
   workflow_dispatch:
   schedule:
     - cron: "0 */1 * * *"
@@ -29,21 +29,21 @@ jobs:
       - name: Get build number
         id: get-build-number
         run: |
-          build_number="$(echo ./code-insider-*.tar.gz | grep -Po "\.\/code-insider-x64-\K.+" | rev | cut -c8- | rev)"
+          build_number="$(echo ./code-stable*.tar.gz | grep -Po "\.\/code-stable-x64-\K.+" | rev | cut -c8- | rev)"
           echo "::set-output name=build_number::${build_number}"
           echo "Latest build number: ${build_number}"
       - name: Extract tar
-        run: tar -xvzf ./code-insider-*.tar.gz
+        run: tar -xvzf ./code-stable-*.tar.gz
       - name: Get version
         id: get-version
         run: |
-          version="$(./VSCode-linux-x64/bin/code-insiders --version | head -n1 | sed "s/-/_/")"
+          version="$(./VSCode-linux-x64/bin/code --version | head -n1 | sed "s/-/_/")"
           echo "::set-output name=version::${version}"
           echo "Latest version: ${version}"
       - name: Get SHA256 of x86_64 tar
         id: sha256-x86_64
         run: |
-          hash="$(sha256sum ./code-insider-*.tar.gz | awk '{ print $1 }')"
+          hash="$(sha256sum ./code-stable-*.tar.gz | awk '{ print $1 }')"
           echo "::set-output name=hash::${hash}"
           echo "SHA256 x86_64: ${hash}"
 
@@ -108,7 +108,7 @@ jobs:
         run: |
           mkdir dist/
           mv pkg/*/*.pkg.* dist
-          repo-add -R dist/visual-studio-code-insiders.db.tar.gz dist/visual-studio-code-insiders-*.pkg.*
+          repo-add -R dist/visual-studio-code.db.tar.gz dist/visual-studio-code-*.pkg.*
       - name: Generate index
         run: repo/.github/actions/generate-index/generate-index.sh dist
       - name: Deploy
