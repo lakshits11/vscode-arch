@@ -25,7 +25,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Download latest tar
-        run: curl -JLO "$(cat PKGBUILD | grep -Po "_src_x86_64=\"\K.+\"" | rev | cut -c2- | rev)"
+        run: |
+          curl -JLO "$(cat PKGBUILD | grep -Po "_src_x86_64=\"\K.+\"" | rev | cut -c2- | rev)"
+          echo "${ls}"
       - name: Get build number
         id: get-build-number
         run: |
