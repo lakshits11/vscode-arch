@@ -24,9 +24,9 @@ optdepends=(
   "libdbusmenu-glib: Needed for KDE global menu"
 )
 
-_src_x86_64="https://update.code.visualstudio.com/latest/linux-x64/insider"
+_src_x86_64="https://update.code.visualstudio.com/latest/linux-x64/stable"
 source_x86_64=(
-  "code_insider_x64_${_pkgbuildnumber}.tar.gz::${_src_x86_64}"
+  "code_stable_x64_${_pkgbuildnumber}.tar.gz::${_src_x86_64}"
   "${pkgname}.desktop"
   "${pkgname}-url-handler.desktop"
 )
